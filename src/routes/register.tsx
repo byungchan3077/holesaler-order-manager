@@ -9,6 +9,7 @@ import { AuthFrame, Notice } from "@/components/app/ui";
 import { currentUser, signUp } from "@/repositories/authRepo";
 import { currentRole, registerRetailer } from "@/repositories/accountRepo";
 import { toUserMessage } from "@/lib/errors";
+import { validateRetailer as validate } from "@/lib/retailerRules";
 
 export const Route = createFileRoute("/register")({
   ssr: false,
@@ -105,17 +106,6 @@ function StepAccount({ onDone }: { onDone: (hasSession: boolean) => void }) {
       </p>
     </form>
   );
-}
-
-function validate(f: { company: string; contact: string; phone: string; address: string; consent: boolean }) {
-  const errs: Partial<Record<"company" | "contact" | "phone" | "address" | "consent", string>> = {};
-  const c = f.company.trim(), p = f.contact.trim(), a = f.address.trim(), ph = f.phone.trim();
-  if (c.length < 1 || c.length > 100) errs.company = "Enter 1–100 characters.";
-  if (p.length < 1 || p.length > 50) errs.contact = "Enter 1–50 characters.";
-  if (!/^[0-9+\- ]{7,20}$/.test(ph)) errs.phone = "7–20 characters: digits, +, - or space.";
-  if (a.length < 1 || a.length > 200) errs.address = "Enter 1–200 characters.";
-  if (!f.consent) errs.consent = "Consent is required to register.";
-  return errs;
 }
 
 function StepCompany({ onDone }: { onDone: () => void }) {
