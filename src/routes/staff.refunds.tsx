@@ -2,6 +2,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import { PlaceholderPage } from "@/components/app/ui";
 
 export const Route = createFileRoute("/staff/refunds")({
+  validateSearch: (s: Record<string, unknown>): { order?: number | undefined } => {
+    const n = Number(s["order"]);
+    return { order: Number.isInteger(n) && n > 0 ? n : undefined };
+  },
   head: () => ({
     meta: [
       { title: "Refunds — HoleSaler" },
