@@ -10,33 +10,253 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as RetailerRouteImport } from './routes/_retailer'
+import { Route as AccountStatusRouteImport } from './routes/account-status'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as RegisterRouteImport } from './routes/register'
+import { Route as StaffRouteImport } from './routes/staff'
+import { Route as RetailerCatalogueRouteImport } from './routes/_retailer.catalogue'
+import { Route as RetailerOrdersRouteImport } from './routes/_retailer.orders'
+import { Route as RetailerSummaryRouteImport } from './routes/_retailer.summary'
+import { Route as StaffInventoryRouteImport } from './routes/staff.inventory'
+import { Route as StaffOrdersRouteImport } from './routes/staff.orders'
+import { Route as StaffPaymentsRouteImport } from './routes/staff.payments'
+import { Route as StaffProductionRouteImport } from './routes/staff.production'
+import { Route as StaffProductsRouteImport } from './routes/staff.products'
+import { Route as StaffRefundsRouteImport } from './routes/staff.refunds'
+import { Route as StaffRetailersRouteImport } from './routes/staff.retailers'
+import { Route as StaffShipmentsRouteImport } from './routes/staff.shipments'
+import { Route as StaffStockRouteImport } from './routes/staff.stock'
+import { Route as StaffSummaryRouteImport } from './routes/staff.summary'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RetailerRoute = RetailerRouteImport.update({
+  id: '/_retailer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountStatusRoute = AccountStatusRouteImport.update({
+  id: '/account-status',
+  path: '/account-status',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StaffRoute = StaffRouteImport.update({
+  id: '/staff',
+  path: '/staff',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RetailerCatalogueRoute = RetailerCatalogueRouteImport.update({
+  id: '/catalogue',
+  path: '/catalogue',
+  getParentRoute: () => RetailerRoute,
+} as any)
+const RetailerOrdersRoute = RetailerOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => RetailerRoute,
+} as any)
+const RetailerSummaryRoute = RetailerSummaryRouteImport.update({
+  id: '/summary',
+  path: '/summary',
+  getParentRoute: () => RetailerRoute,
+} as any)
+const StaffInventoryRoute = StaffInventoryRouteImport.update({
+  id: '/inventory',
+  path: '/inventory',
+  getParentRoute: () => StaffRoute,
+} as any)
+const StaffOrdersRoute = StaffOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => StaffRoute,
+} as any)
+const StaffPaymentsRoute = StaffPaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
+  getParentRoute: () => StaffRoute,
+} as any)
+const StaffProductionRoute = StaffProductionRouteImport.update({
+  id: '/production',
+  path: '/production',
+  getParentRoute: () => StaffRoute,
+} as any)
+const StaffProductsRoute = StaffProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
+  getParentRoute: () => StaffRoute,
+} as any)
+const StaffRefundsRoute = StaffRefundsRouteImport.update({
+  id: '/refunds',
+  path: '/refunds',
+  getParentRoute: () => StaffRoute,
+} as any)
+const StaffRetailersRoute = StaffRetailersRouteImport.update({
+  id: '/retailers',
+  path: '/retailers',
+  getParentRoute: () => StaffRoute,
+} as any)
+const StaffShipmentsRoute = StaffShipmentsRouteImport.update({
+  id: '/shipments',
+  path: '/shipments',
+  getParentRoute: () => StaffRoute,
+} as any)
+const StaffStockRoute = StaffStockRouteImport.update({
+  id: '/stock',
+  path: '/stock',
+  getParentRoute: () => StaffRoute,
+} as any)
+const StaffSummaryRoute = StaffSummaryRouteImport.update({
+  id: '/summary',
+  path: '/summary',
+  getParentRoute: () => StaffRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/account-status': typeof AccountStatusRoute
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/staff': typeof StaffRouteWithChildren
+  '/catalogue': typeof RetailerCatalogueRoute
+  '/orders': typeof RetailerOrdersRoute
+  '/summary': typeof RetailerSummaryRoute
+  '/staff/inventory': typeof StaffInventoryRoute
+  '/staff/orders': typeof StaffOrdersRoute
+  '/staff/payments': typeof StaffPaymentsRoute
+  '/staff/production': typeof StaffProductionRoute
+  '/staff/products': typeof StaffProductsRoute
+  '/staff/refunds': typeof StaffRefundsRoute
+  '/staff/retailers': typeof StaffRetailersRoute
+  '/staff/shipments': typeof StaffShipmentsRoute
+  '/staff/stock': typeof StaffStockRoute
+  '/staff/summary': typeof StaffSummaryRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/account-status': typeof AccountStatusRoute
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/staff': typeof StaffRouteWithChildren
+  '/catalogue': typeof RetailerCatalogueRoute
+  '/orders': typeof RetailerOrdersRoute
+  '/summary': typeof RetailerSummaryRoute
+  '/staff/inventory': typeof StaffInventoryRoute
+  '/staff/orders': typeof StaffOrdersRoute
+  '/staff/payments': typeof StaffPaymentsRoute
+  '/staff/production': typeof StaffProductionRoute
+  '/staff/products': typeof StaffProductsRoute
+  '/staff/refunds': typeof StaffRefundsRoute
+  '/staff/retailers': typeof StaffRetailersRoute
+  '/staff/shipments': typeof StaffShipmentsRoute
+  '/staff/stock': typeof StaffStockRoute
+  '/staff/summary': typeof StaffSummaryRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_retailer': typeof RetailerRouteWithChildren
+  '/account-status': typeof AccountStatusRoute
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/staff': typeof StaffRouteWithChildren
+  '/_retailer/catalogue': typeof RetailerCatalogueRoute
+  '/_retailer/orders': typeof RetailerOrdersRoute
+  '/_retailer/summary': typeof RetailerSummaryRoute
+  '/staff/inventory': typeof StaffInventoryRoute
+  '/staff/orders': typeof StaffOrdersRoute
+  '/staff/payments': typeof StaffPaymentsRoute
+  '/staff/production': typeof StaffProductionRoute
+  '/staff/products': typeof StaffProductsRoute
+  '/staff/refunds': typeof StaffRefundsRoute
+  '/staff/retailers': typeof StaffRetailersRoute
+  '/staff/shipments': typeof StaffShipmentsRoute
+  '/staff/stock': typeof StaffStockRoute
+  '/staff/summary': typeof StaffSummaryRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/account-status'
+    | '/login'
+    | '/register'
+    | '/staff'
+    | '/catalogue'
+    | '/orders'
+    | '/summary'
+    | '/staff/inventory'
+    | '/staff/orders'
+    | '/staff/payments'
+    | '/staff/production'
+    | '/staff/products'
+    | '/staff/refunds'
+    | '/staff/retailers'
+    | '/staff/shipments'
+    | '/staff/stock'
+    | '/staff/summary'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/account-status'
+    | '/login'
+    | '/register'
+    | '/staff'
+    | '/catalogue'
+    | '/orders'
+    | '/summary'
+    | '/staff/inventory'
+    | '/staff/orders'
+    | '/staff/payments'
+    | '/staff/production'
+    | '/staff/products'
+    | '/staff/refunds'
+    | '/staff/retailers'
+    | '/staff/shipments'
+    | '/staff/stock'
+    | '/staff/summary'
+  id:
+    | '__root__'
+    | '/'
+    | '/_retailer'
+    | '/account-status'
+    | '/login'
+    | '/register'
+    | '/staff'
+    | '/_retailer/catalogue'
+    | '/_retailer/orders'
+    | '/_retailer/summary'
+    | '/staff/inventory'
+    | '/staff/orders'
+    | '/staff/payments'
+    | '/staff/production'
+    | '/staff/products'
+    | '/staff/refunds'
+    | '/staff/retailers'
+    | '/staff/shipments'
+    | '/staff/stock'
+    | '/staff/summary'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  RetailerRoute: typeof RetailerRouteWithChildren
+  AccountStatusRoute: typeof AccountStatusRoute
+  LoginRoute: typeof LoginRoute
+  RegisterRoute: typeof RegisterRoute
+  StaffRoute: typeof StaffRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +268,186 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_retailer': {
+      id: '/_retailer'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof RetailerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account-status': {
+      id: '/account-status'
+      path: '/account-status'
+      fullPath: '/account-status'
+      preLoaderRoute: typeof AccountStatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/staff': {
+      id: '/staff'
+      path: '/staff'
+      fullPath: '/staff'
+      preLoaderRoute: typeof StaffRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_retailer/catalogue': {
+      id: '/_retailer/catalogue'
+      path: '/catalogue'
+      fullPath: '/catalogue'
+      preLoaderRoute: typeof RetailerCatalogueRouteImport
+      parentRoute: typeof RetailerRoute
+    }
+    '/_retailer/orders': {
+      id: '/_retailer/orders'
+      path: '/orders'
+      fullPath: '/orders'
+      preLoaderRoute: typeof RetailerOrdersRouteImport
+      parentRoute: typeof RetailerRoute
+    }
+    '/_retailer/summary': {
+      id: '/_retailer/summary'
+      path: '/summary'
+      fullPath: '/summary'
+      preLoaderRoute: typeof RetailerSummaryRouteImport
+      parentRoute: typeof RetailerRoute
+    }
+    '/staff/inventory': {
+      id: '/staff/inventory'
+      path: '/inventory'
+      fullPath: '/staff/inventory'
+      preLoaderRoute: typeof StaffInventoryRouteImport
+      parentRoute: typeof StaffRoute
+    }
+    '/staff/orders': {
+      id: '/staff/orders'
+      path: '/orders'
+      fullPath: '/staff/orders'
+      preLoaderRoute: typeof StaffOrdersRouteImport
+      parentRoute: typeof StaffRoute
+    }
+    '/staff/payments': {
+      id: '/staff/payments'
+      path: '/payments'
+      fullPath: '/staff/payments'
+      preLoaderRoute: typeof StaffPaymentsRouteImport
+      parentRoute: typeof StaffRoute
+    }
+    '/staff/production': {
+      id: '/staff/production'
+      path: '/production'
+      fullPath: '/staff/production'
+      preLoaderRoute: typeof StaffProductionRouteImport
+      parentRoute: typeof StaffRoute
+    }
+    '/staff/products': {
+      id: '/staff/products'
+      path: '/products'
+      fullPath: '/staff/products'
+      preLoaderRoute: typeof StaffProductsRouteImport
+      parentRoute: typeof StaffRoute
+    }
+    '/staff/refunds': {
+      id: '/staff/refunds'
+      path: '/refunds'
+      fullPath: '/staff/refunds'
+      preLoaderRoute: typeof StaffRefundsRouteImport
+      parentRoute: typeof StaffRoute
+    }
+    '/staff/retailers': {
+      id: '/staff/retailers'
+      path: '/retailers'
+      fullPath: '/staff/retailers'
+      preLoaderRoute: typeof StaffRetailersRouteImport
+      parentRoute: typeof StaffRoute
+    }
+    '/staff/shipments': {
+      id: '/staff/shipments'
+      path: '/shipments'
+      fullPath: '/staff/shipments'
+      preLoaderRoute: typeof StaffShipmentsRouteImport
+      parentRoute: typeof StaffRoute
+    }
+    '/staff/stock': {
+      id: '/staff/stock'
+      path: '/stock'
+      fullPath: '/staff/stock'
+      preLoaderRoute: typeof StaffStockRouteImport
+      parentRoute: typeof StaffRoute
+    }
+    '/staff/summary': {
+      id: '/staff/summary'
+      path: '/summary'
+      fullPath: '/staff/summary'
+      preLoaderRoute: typeof StaffSummaryRouteImport
+      parentRoute: typeof StaffRoute
+    }
   }
 }
 
+interface RetailerRouteChildren {
+  RetailerCatalogueRoute: typeof RetailerCatalogueRoute
+  RetailerOrdersRoute: typeof RetailerOrdersRoute
+  RetailerSummaryRoute: typeof RetailerSummaryRoute
+}
+
+const RetailerRouteChildren: RetailerRouteChildren = {
+  RetailerCatalogueRoute: RetailerCatalogueRoute,
+  RetailerOrdersRoute: RetailerOrdersRoute,
+  RetailerSummaryRoute: RetailerSummaryRoute,
+}
+
+const RetailerRouteWithChildren = RetailerRoute._addFileChildren(
+  RetailerRouteChildren,
+)
+
+interface StaffRouteChildren {
+  StaffInventoryRoute: typeof StaffInventoryRoute
+  StaffOrdersRoute: typeof StaffOrdersRoute
+  StaffPaymentsRoute: typeof StaffPaymentsRoute
+  StaffProductionRoute: typeof StaffProductionRoute
+  StaffProductsRoute: typeof StaffProductsRoute
+  StaffRefundsRoute: typeof StaffRefundsRoute
+  StaffRetailersRoute: typeof StaffRetailersRoute
+  StaffShipmentsRoute: typeof StaffShipmentsRoute
+  StaffStockRoute: typeof StaffStockRoute
+  StaffSummaryRoute: typeof StaffSummaryRoute
+}
+
+const StaffRouteChildren: StaffRouteChildren = {
+  StaffInventoryRoute: StaffInventoryRoute,
+  StaffOrdersRoute: StaffOrdersRoute,
+  StaffPaymentsRoute: StaffPaymentsRoute,
+  StaffProductionRoute: StaffProductionRoute,
+  StaffProductsRoute: StaffProductsRoute,
+  StaffRefundsRoute: StaffRefundsRoute,
+  StaffRetailersRoute: StaffRetailersRoute,
+  StaffShipmentsRoute: StaffShipmentsRoute,
+  StaffStockRoute: StaffStockRoute,
+  StaffSummaryRoute: StaffSummaryRoute,
+}
+
+const StaffRouteWithChildren = StaffRoute._addFileChildren(StaffRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  RetailerRoute: RetailerRouteWithChildren,
+  AccountStatusRoute: AccountStatusRoute,
+  LoginRoute: LoginRoute,
+  RegisterRoute: RegisterRoute,
+  StaffRoute: StaffRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

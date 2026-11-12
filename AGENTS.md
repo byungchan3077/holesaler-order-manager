@@ -28,3 +28,9 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- Pages and components never import the Supabase client; they call functions in `src/repositories/` (add read-only functions there when needed). Why: single data access layer.
+- All user-facing errors go through `toUserMessage` in `src/lib/errors.ts`; dates/money through `src/lib/format.ts`. Why: consistent messages and Asia/Seoul formatting.
+- Role routing lives in `src/lib/destination.ts`; `/_retailer` and `/staff` layouts guard by role client-side (`ssr: false`). Why: session is in browser storage.
+- Visual tokens and utilities (`panel`, `num`, `page-title`, pills) live in `src/styles.css` and `src/components/app/ui.tsx`. Why: one place for the style.
