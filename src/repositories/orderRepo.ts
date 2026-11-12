@@ -25,8 +25,8 @@ export async function getOrder(id: number) {
 export async function placeOrder(lines: { product_id: number; quantity: number }[]) {
   return unwrap(await supabase.rpc("place_order", { p_lines: lines }));
 }
-export async function cancelOrder(a: { p_order_id: number; p_reason: string }) {
-  return unwrap(await supabase.rpc("cancel_order", a));
+export async function cancelOrder(orderId: number, reason?: string) {
+  return unwrap(await supabase.rpc("cancel_order", reason ? { p_order_id: orderId, p_reason: reason } : { p_order_id: orderId }));
 }
 export async function shipOrder(a: { p_order_id: number; p_tracking_ref: string }) {
   return unwrap(await supabase.rpc("ship_order", a));
