@@ -1,4 +1,5 @@
 # HoleSaler Order Manager
+url: https://payment-pilot-orders.lovable.app/staff/orders
 
 VISUAL STYLE (apply to every page, now and in later steps)
 
