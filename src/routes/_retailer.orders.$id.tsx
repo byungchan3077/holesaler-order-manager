@@ -104,18 +104,14 @@ function OrderDetailPage() {
           <div className="grid gap-4 lg:grid-cols-[1fr_2fr]">
             <section className="panel">
               <h2 className="section-title px-4 py-3">Shipment</h2>
-              {o.shipment.length === 0 ? (
+              {!o.shipment ? (
                 <EmptyState>Not shipped yet.</EmptyState>
               ) : (
                 <dl className="grid grid-cols-[130px_1fr] gap-y-2 px-4 pb-4">
-                  {o.shipment.map((s) => (
-                    <div key={s.shipment_id} className="contents">
-                      <dt className="text-muted-foreground">Shipped on</dt>
-                      <dd className="tabular-nums">{formatDate(s.shipped_at)}</dd>
-                      <dt className="text-muted-foreground">Tracking</dt>
-                      <dd>{s.tracking_ref || "—"}</dd>
-                    </div>
-                  ))}
+                  <dt className="text-muted-foreground">Shipped on</dt>
+                  <dd className="tabular-nums">{formatDate(o.shipment.shipped_at)}</dd>
+                  <dt className="text-muted-foreground">Tracking</dt>
+                  <dd>{o.shipment.tracking_ref || "—"}</dd>
                 </dl>
               )}
             </section>
