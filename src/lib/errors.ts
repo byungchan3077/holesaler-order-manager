@@ -4,6 +4,7 @@ type ErrLike = { code?: string; message?: string; name?: string } | null | undef
 export function toUserMessage(error: unknown, overrides: Record<string, string> = {}): string {
   const e = error as ErrLike;
   const message = e?.message ?? (typeof error === "string" ? error : "");
+  if (e?.code && overrides[e.code]) return overrides[e.code]!;
   if (e?.code === "42501") return "You do not have permission for this action";
   if (e?.code === "23505") return "This value is already used";
   if (e?.code === "23514") return "A field is outside its allowed format or range";

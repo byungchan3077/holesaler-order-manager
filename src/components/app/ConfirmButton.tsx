@@ -7,12 +7,12 @@ import { Button, buttonVariants } from "@/components/ui/button";
 
 /** Red action that always asks for confirmation first. */
 export function ConfirmButton({
-  label, title, description, confirmLabel, onConfirm, disabled,
-}: { label: string; title: string; description: ReactNode; confirmLabel: string; onConfirm: () => void; disabled?: boolean }) {
+  label, title, description, confirmLabel, onConfirm, disabled, size,
+}: { size?: "sm" | "default"; label: string; title: string; description: ReactNode; confirmLabel: string; onConfirm: () => void; disabled?: boolean }) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="destructive" disabled={disabled}>{label}</Button>
+        <Button variant="destructive" size={size ?? "default"} disabled={disabled}>{label}</Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

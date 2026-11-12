@@ -17,6 +17,11 @@ describe("toUserMessage", () => {
   it("uses an override for the CODE", () => {
     expect(toUserMessage({ message: "OUT_OF_STOCK: x" }, { OUT_OF_STOCK: "Sold out" })).toBe("Sold out");
   });
+  it("uses an override for a database error code", () => {
+    expect(toUserMessage({ code: "23505", message: "dup" }, { "23505": "This code or an active product with this name already exists" })).toBe(
+      "This code or an active product with this name already exists",
+    );
+  });
   it("maps network failures", () => {
     expect(toUserMessage(new TypeError("Failed to fetch"))).toBe("Could not reach the server; try again.");
   });
