@@ -22,12 +22,26 @@ export async function getOrder(id: number) {
       .single(),
   );
 }
+export type OrderDetail = Awaited<ReturnType<typeof getOrder>>;
+
+/** Orders of one status with retailer, lines, shipment and payments (read-only). */
+export async function listOrderDetails(status: Enums<"order_status">, opts: { ascending?: boolean; limit?: number } = {}) {
+  let q = supabase
+    .from("purchase_order")
+    .select("*, retailer(company_name), order_item(*, product(name, product_code)), shipment(*), payment(*)")
+    .eq("status", status)
+    .order("ordered_at", { ascending: opts.ascending ?? true });
+  if (opts.limit) q = q.limit(opts.limit);
+  return unwrap(await q);
+}
+export type OrderWithDetails = Awaited<ReturnType<typeof listOrderDetails>>[number];
+
 export async function placeOrder(lines: { product_id: number; quantity: number }[]) {
   return unwrap(await supabase.rpc("place_order", { p_lines: lines }));
 }
 export async function cancelOrder(orderId: number, reason?: string) {
   return unwrap(await supabase.rpc("cancel_order", reason ? { p_order_id: orderId, p_reason: reason } : { p_order_id: orderId }));
 }
-export async function shipOrder(a: { p_order_id: number; p_tracking_ref: string }) {
-  return unwrap(await supabase.rpc("ship_order", a));
+export async function shipOrder(orderId: number, trackingRef: string) {
+  return unwrap(await supabase.rpc("ship_order", { p_order_id: orderId, p_tracking_ref: trackingRef }));
 }
