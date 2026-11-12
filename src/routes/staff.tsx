@@ -1,5 +1,5 @@
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
-import { AppShell } from "@/components/app/AppShell";
+import { AppShell, type NavItem } from "@/components/app/AppShell";
 import { resolveDestination } from "@/lib/destination";
 import { myProfile } from "@/repositories/accountRepo";
 
@@ -14,7 +14,7 @@ export const Route = createFileRoute("/staff")({
   component: StaffLayout,
 });
 
-const NAV = [
+const NAV: NavItem[] = [
   { to: "/staff/orders", label: "Orders" },
   { to: "/staff/payments", label: "Payments" },
   { to: "/staff/shipments", label: "Shipments" },

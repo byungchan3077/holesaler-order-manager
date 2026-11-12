@@ -8,7 +8,7 @@ export function toUserMessage(error: unknown, overrides: Record<string, string> 
   if (e?.code === "23505") return "This value is already used";
   if (e?.code === "23514") return "A field is outside its allowed format or range";
   const m = /^([A-Z][A-Z0-9_]*):\s*(.*)$/s.exec(message);
-  if (m) return overrides[m[1]] ?? m[2].trim();
+  if (m) return overrides[m[1] ?? ""] ?? (m[2] ?? "").trim();
   if (
     error instanceof TypeError ||
     /failed to fetch|networkerror|network request failed|load failed/i.test(message)

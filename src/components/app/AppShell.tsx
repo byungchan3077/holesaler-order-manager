@@ -1,8 +1,8 @@
-import { Link, useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate, type LinkProps } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { signOut } from "@/repositories/authRepo";
 
-export type NavItem = { to: string; label: string };
+export type NavItem = { to: NonNullable<LinkProps["to"]>; label: string };
 
 export function AppShell({ nav, name, children }: { nav: NavItem[]; name: string; children: ReactNode }) {
   const navigate = useNavigate();

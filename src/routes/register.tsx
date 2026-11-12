@@ -12,8 +12,8 @@ import { toUserMessage } from "@/lib/errors";
 
 export const Route = createFileRoute("/register")({
   ssr: false,
-  validateSearch: (s: Record<string, unknown>): { step?: 1 | 2 } => ({
-    step: Number(s.step) === 2 ? 2 : Number(s.step) === 1 ? 1 : undefined,
+  validateSearch: (s: Record<string, unknown>): { step?: 1 | 2 | undefined } => ({
+    step: Number(s["step"]) === 2 ? 2 : Number(s["step"]) === 1 ? 1 : undefined,
   }),
   head: () => ({
     meta: [
@@ -108,7 +108,7 @@ function StepAccount({ onDone }: { onDone: (hasSession: boolean) => void }) {
 }
 
 function validate(f: { company: string; contact: string; phone: string; address: string; consent: boolean }) {
-  const errs: Record<string, string> = {};
+  const errs: Partial<Record<"company" | "contact" | "phone" | "address" | "consent", string>> = {};
   const c = f.company.trim(), p = f.contact.trim(), a = f.address.trim(), ph = f.phone.trim();
   if (c.length < 1 || c.length > 100) errs.company = "Enter 1–100 characters.";
   if (p.length < 1 || p.length > 50) errs.contact = "Enter 1–50 characters.";
@@ -120,7 +120,7 @@ function validate(f: { company: string; contact: string; phone: string; address:
 
 function StepCompany({ onDone }: { onDone: () => void }) {
   const [f, setF] = useState({ company: "", contact: "", phone: "", address: "", consent: false });
-  const [errs, setErrs] = useState<Record<string, string>>({});
+  const [errs, setErrs] = useState<ReturnType<typeof validate>>({});
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const field = (k: "company" | "contact" | "phone", label: string) => (

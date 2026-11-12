@@ -7,7 +7,7 @@ export type Views<T extends keyof Database["public"]["Views"]> = Database["publi
 export type Enums<T extends keyof Database["public"]["Enums"]> = Database["public"]["Enums"][T];
 
 /** Throws the Supabase error so callers (react-query) can show toUserMessage. */
-export function unwrap<T>(res: { data: T; error: unknown }): T {
+export function unwrap<R extends { data: unknown; error: unknown }>(res: R): NonNullable<R["data"]> {
   if (res.error) throw res.error;
-  return res.data;
+  return res.data as NonNullable<R["data"]>;
 }

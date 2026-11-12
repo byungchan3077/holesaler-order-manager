@@ -13,7 +13,7 @@ const TEXT: Record<S, string> = {
 export const Route = createFileRoute("/account-status")({
   ssr: false,
   validateSearch: (s: Record<string, unknown>): { s: S } => ({
-    s: s.s === "REJECTED" || s.s === "CLOSED" ? s.s : "PENDING",
+    s: s["s"] === "REJECTED" || s["s"] === "CLOSED" ? s["s"] : "PENDING",
   }),
   head: () => ({
     meta: [

@@ -13,7 +13,9 @@ export async function myRetailer(): Promise<Retailer> {
 export async function myProfile(): Promise<{ name: string; email: string } | null> {
   const { data: u } = await supabase.auth.getUser();
   if (!u.user) return null;
-  return unwrap(await supabase.from("app_user").select("name, email").eq("user_id", u.user.id).maybeSingle());
+  const res = await supabase.from("app_user").select("name, email").eq("user_id", u.user.id).maybeSingle();
+  if (res.error) throw res.error;
+  return res.data;
 }
 export async function listRetailers(): Promise<Retailer[]> {
   return unwrap(await supabase.from("retailer").select("*").order("created_at", { ascending: false }));
