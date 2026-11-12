@@ -13,7 +13,7 @@ import { ReasonDialog } from "@/components/app/ReasonDialog";
 import { listOrderDetails, listOrders, type OrderOverview } from "@/repositories/orderRepo";
 import { cancelPayment, confirmPayment } from "@/repositories/paymentRepo";
 import { toUserMessage } from "@/lib/errors";
-import { formatDateTime, formatWon } from "@/lib/format";
+import { formatDateTime, formatWon, seoulLocalToIso, seoulNowLocal } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/staff/payments")({
@@ -88,22 +88,15 @@ function AwaitingTab() {
   );
 }
 
-/** Current Seoul time as a datetime-local value. */
-function nowLocal() {
-  const p = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).formatToParts(new Date());
-  const g = (t: string) => p.find((x) => x.type === t)?.value ?? "";
-  return `${g("year")}-${g("month")}-${g("day")}T${g("hour")}:${g("minute")}`;
-}
-
 function ConfirmPaymentDialog({ order, onClose }: { order: OrderOverview | null; onClose: () => void }) {
   const qc = useQueryClient();
   const [amount, setAmount] = useState("");
   const [method, setMethod] = useState("Bank transfer");
-  const [at, setAt] = useState(nowLocal());
-  const reset = () => { setAmount(""); setMethod("Bank transfer"); setAt(nowLocal()); };
+  const [at, setAt] = useState(seoulNowLocal());
+  const reset = () => { setAmount(""); setMethod("Bank transfer"); setAt(seoulNowLocal()); };
   const m = useMutation({
     mutationFn: () =>
-      confirmPayment({ p_order_id: order!.order_id!, p_amount: Number(amount), p_method: method.trim(), p_transacted_at: `${at}:00+09:00` }),
+      confirmPayment({ p_order_id: order!.order_id!, p_amount: Number(amount), p_method: method.trim(), p_transacted_at: seoulLocalToIso(at) }),
     onSuccess: () => { toast.success(`Payment confirmed for order #${order?.order_id}`); reset(); onClose(); },
     onError: (err) =>
       toast.error(toUserMessage(err, {

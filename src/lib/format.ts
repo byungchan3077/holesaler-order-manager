@@ -67,3 +67,17 @@ export const REFUND_REASON_LABEL: Record<string, string> = {
   TRANSIT_ISSUE: "Transit issue",
   OVERCHARGE: "Overcharge",
 };
+
+/** Current Seoul time as a datetime-local input value (YYYY-MM-DDTHH:mm). */
+export function seoulNowLocal(): string {
+  const d = formatDateTime(new Date());
+  return d.replace(" ", "T");
+}
+/** A datetime-local value entered in Seoul time, as an ISO string with offset. */
+export function seoulLocalToIso(local: string): string {
+  return `${local}:00+09:00`;
+}
+
+export const ADJUSTMENT_REASON_LABEL: Record<string, string> = {
+  LOSS: "Loss", DAMAGE: "Damage", MISCOUNT: "Miscount", FOUND: "Found", CORRECTION: "Correction", RETURN: "Return",
+};
