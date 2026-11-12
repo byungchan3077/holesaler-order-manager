@@ -16,3 +16,9 @@ export function toUserMessage(error: unknown, overrides: Record<string, string> 
     return "Could not reach the server; try again.";
   return message || "Something went wrong; try again.";
 }
+
+/** The upper-case CODE from a "CODE: message" database error, if any. */
+export function errorCode(error: unknown): string | null {
+  const message = (error as ErrLike)?.message ?? "";
+  return /^([A-Z][A-Z0-9_]*):/.exec(message)?.[1] ?? null;
+}

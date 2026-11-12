@@ -16,7 +16,6 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as StaffRouteImport } from './routes/staff'
 import { Route as RetailerCatalogueRouteImport } from './routes/_retailer.catalogue'
-import { Route as RetailerOrdersRouteImport } from './routes/_retailer.orders'
 import { Route as RetailerSummaryRouteImport } from './routes/_retailer.summary'
 import { Route as StaffInventoryRouteImport } from './routes/staff.inventory'
 import { Route as StaffOrdersRouteImport } from './routes/staff.orders'
@@ -28,6 +27,9 @@ import { Route as StaffRetailersRouteImport } from './routes/staff.retailers'
 import { Route as StaffShipmentsRouteImport } from './routes/staff.shipments'
 import { Route as StaffStockRouteImport } from './routes/staff.stock'
 import { Route as StaffSummaryRouteImport } from './routes/staff.summary'
+import { Route as RetailerOrderNewRouteImport } from './routes/_retailer.order.new'
+import { Route as RetailerOrdersIndexRouteImport } from './routes/_retailer.orders.index'
+import { Route as RetailerOrdersIdRouteImport } from './routes/_retailer.orders.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -61,11 +63,6 @@ const StaffRoute = StaffRouteImport.update({
 const RetailerCatalogueRoute = RetailerCatalogueRouteImport.update({
   id: '/catalogue',
   path: '/catalogue',
-  getParentRoute: () => RetailerRoute,
-} as any)
-const RetailerOrdersRoute = RetailerOrdersRouteImport.update({
-  id: '/orders',
-  path: '/orders',
   getParentRoute: () => RetailerRoute,
 } as any)
 const RetailerSummaryRoute = RetailerSummaryRouteImport.update({
@@ -123,6 +120,21 @@ const StaffSummaryRoute = StaffSummaryRouteImport.update({
   path: '/summary',
   getParentRoute: () => StaffRoute,
 } as any)
+const RetailerOrderNewRoute = RetailerOrderNewRouteImport.update({
+  id: '/order/new',
+  path: '/order/new',
+  getParentRoute: () => RetailerRoute,
+} as any)
+const RetailerOrdersIndexRoute = RetailerOrdersIndexRouteImport.update({
+  id: '/orders/',
+  path: '/orders/',
+  getParentRoute: () => RetailerRoute,
+} as any)
+const RetailerOrdersIdRoute = RetailerOrdersIdRouteImport.update({
+  id: '/orders/$id',
+  path: '/orders/$id',
+  getParentRoute: () => RetailerRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -131,7 +143,6 @@ export interface FileRoutesByFullPath {
   '/register': typeof RegisterRoute
   '/staff': typeof StaffRouteWithChildren
   '/catalogue': typeof RetailerCatalogueRoute
-  '/orders': typeof RetailerOrdersRoute
   '/summary': typeof RetailerSummaryRoute
   '/staff/inventory': typeof StaffInventoryRoute
   '/staff/orders': typeof StaffOrdersRoute
@@ -143,6 +154,9 @@ export interface FileRoutesByFullPath {
   '/staff/shipments': typeof StaffShipmentsRoute
   '/staff/stock': typeof StaffStockRoute
   '/staff/summary': typeof StaffSummaryRoute
+  '/order/new': typeof RetailerOrderNewRoute
+  '/orders/$id': typeof RetailerOrdersIdRoute
+  '/orders/': typeof RetailerOrdersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -151,7 +165,6 @@ export interface FileRoutesByTo {
   '/register': typeof RegisterRoute
   '/staff': typeof StaffRouteWithChildren
   '/catalogue': typeof RetailerCatalogueRoute
-  '/orders': typeof RetailerOrdersRoute
   '/summary': typeof RetailerSummaryRoute
   '/staff/inventory': typeof StaffInventoryRoute
   '/staff/orders': typeof StaffOrdersRoute
@@ -163,6 +176,9 @@ export interface FileRoutesByTo {
   '/staff/shipments': typeof StaffShipmentsRoute
   '/staff/stock': typeof StaffStockRoute
   '/staff/summary': typeof StaffSummaryRoute
+  '/order/new': typeof RetailerOrderNewRoute
+  '/orders/$id': typeof RetailerOrdersIdRoute
+  '/orders': typeof RetailerOrdersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -173,7 +189,6 @@ export interface FileRoutesById {
   '/register': typeof RegisterRoute
   '/staff': typeof StaffRouteWithChildren
   '/_retailer/catalogue': typeof RetailerCatalogueRoute
-  '/_retailer/orders': typeof RetailerOrdersRoute
   '/_retailer/summary': typeof RetailerSummaryRoute
   '/staff/inventory': typeof StaffInventoryRoute
   '/staff/orders': typeof StaffOrdersRoute
@@ -185,6 +200,9 @@ export interface FileRoutesById {
   '/staff/shipments': typeof StaffShipmentsRoute
   '/staff/stock': typeof StaffStockRoute
   '/staff/summary': typeof StaffSummaryRoute
+  '/_retailer/order/new': typeof RetailerOrderNewRoute
+  '/_retailer/orders/$id': typeof RetailerOrdersIdRoute
+  '/_retailer/orders/': typeof RetailerOrdersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -195,7 +213,6 @@ export interface FileRouteTypes {
     | '/register'
     | '/staff'
     | '/catalogue'
-    | '/orders'
     | '/summary'
     | '/staff/inventory'
     | '/staff/orders'
@@ -207,6 +224,9 @@ export interface FileRouteTypes {
     | '/staff/shipments'
     | '/staff/stock'
     | '/staff/summary'
+    | '/order/new'
+    | '/orders/$id'
+    | '/orders/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -215,7 +235,6 @@ export interface FileRouteTypes {
     | '/register'
     | '/staff'
     | '/catalogue'
-    | '/orders'
     | '/summary'
     | '/staff/inventory'
     | '/staff/orders'
@@ -227,6 +246,9 @@ export interface FileRouteTypes {
     | '/staff/shipments'
     | '/staff/stock'
     | '/staff/summary'
+    | '/order/new'
+    | '/orders/$id'
+    | '/orders'
   id:
     | '__root__'
     | '/'
@@ -236,7 +258,6 @@ export interface FileRouteTypes {
     | '/register'
     | '/staff'
     | '/_retailer/catalogue'
-    | '/_retailer/orders'
     | '/_retailer/summary'
     | '/staff/inventory'
     | '/staff/orders'
@@ -248,6 +269,9 @@ export interface FileRouteTypes {
     | '/staff/shipments'
     | '/staff/stock'
     | '/staff/summary'
+    | '/_retailer/order/new'
+    | '/_retailer/orders/$id'
+    | '/_retailer/orders/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -308,13 +332,6 @@ declare module '@tanstack/react-router' {
       path: '/catalogue'
       fullPath: '/catalogue'
       preLoaderRoute: typeof RetailerCatalogueRouteImport
-      parentRoute: typeof RetailerRoute
-    }
-    '/_retailer/orders': {
-      id: '/_retailer/orders'
-      path: '/orders'
-      fullPath: '/orders'
-      preLoaderRoute: typeof RetailerOrdersRouteImport
       parentRoute: typeof RetailerRoute
     }
     '/_retailer/summary': {
@@ -394,19 +411,44 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StaffSummaryRouteImport
       parentRoute: typeof StaffRoute
     }
+    '/_retailer/order/new': {
+      id: '/_retailer/order/new'
+      path: '/order/new'
+      fullPath: '/order/new'
+      preLoaderRoute: typeof RetailerOrderNewRouteImport
+      parentRoute: typeof RetailerRoute
+    }
+    '/_retailer/orders/': {
+      id: '/_retailer/orders/'
+      path: '/orders'
+      fullPath: '/orders/'
+      preLoaderRoute: typeof RetailerOrdersIndexRouteImport
+      parentRoute: typeof RetailerRoute
+    }
+    '/_retailer/orders/$id': {
+      id: '/_retailer/orders/$id'
+      path: '/orders/$id'
+      fullPath: '/orders/$id'
+      preLoaderRoute: typeof RetailerOrdersIdRouteImport
+      parentRoute: typeof RetailerRoute
+    }
   }
 }
 
 interface RetailerRouteChildren {
   RetailerCatalogueRoute: typeof RetailerCatalogueRoute
-  RetailerOrdersRoute: typeof RetailerOrdersRoute
   RetailerSummaryRoute: typeof RetailerSummaryRoute
+  RetailerOrderNewRoute: typeof RetailerOrderNewRoute
+  RetailerOrdersIdRoute: typeof RetailerOrdersIdRoute
+  RetailerOrdersIndexRoute: typeof RetailerOrdersIndexRoute
 }
 
 const RetailerRouteChildren: RetailerRouteChildren = {
   RetailerCatalogueRoute: RetailerCatalogueRoute,
-  RetailerOrdersRoute: RetailerOrdersRoute,
   RetailerSummaryRoute: RetailerSummaryRoute,
+  RetailerOrderNewRoute: RetailerOrderNewRoute,
+  RetailerOrdersIdRoute: RetailerOrdersIdRoute,
+  RetailerOrdersIndexRoute: RetailerOrdersIndexRoute,
 }
 
 const RetailerRouteWithChildren = RetailerRoute._addFileChildren(

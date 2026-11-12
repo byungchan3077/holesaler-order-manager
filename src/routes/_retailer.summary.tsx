@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { PlaceholderPage } from "@/components/app/ui";
+import { PageHeader } from "@/components/app/ui";
+import { SummaryView } from "@/components/app/SummaryView";
 
 export const Route = createFileRoute("/_retailer/summary")({
   head: () => ({
@@ -10,5 +11,10 @@ export const Route = createFileRoute("/_retailer/summary")({
       { property: "og:description", content: "Your order and payment totals by period." },
     ],
   }),
-  component: () => <PlaceholderPage title="Summary" description="Your order and payment totals by period." />,
+  component: () => (
+    <>
+      <PageHeader title="Summary" description="Your order and payment totals by period." />
+      <SummaryView />
+    </>
+  ),
 });

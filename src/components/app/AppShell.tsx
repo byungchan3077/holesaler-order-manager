@@ -4,7 +4,7 @@ import { signOut } from "@/repositories/authRepo";
 
 export type NavItem = { to: NonNullable<LinkProps["to"]>; label: string };
 
-export function AppShell({ nav, name, children }: { nav: NavItem[]; name: string; children: ReactNode }) {
+export function AppShell({ nav, name, actions, children }: { nav: NavItem[]; name: string; actions?: ReactNode; children: ReactNode }) {
   const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-background">
@@ -24,6 +24,7 @@ export function AppShell({ nav, name, children }: { nav: NavItem[]; name: string
             ))}
           </nav>
           <div className="flex items-center gap-3 whitespace-nowrap text-[13px]">
+            {actions}
             <span className="text-topbar-muted">{name}</span>
             <button
               className="rounded border border-topbar-muted/40 px-2 py-1 hover:bg-topbar-foreground/10"

@@ -41,3 +41,29 @@ export const ORDER_STATUS_LABEL = {
   CANCELLED: "Cancelled",
 } as const;
 export type OrderStatus = keyof typeof ORDER_STATUS_LABEL;
+
+/** Today's date in Asia/Seoul as YYYY-MM-DD. */
+export function seoulToday(): string {
+  return formatDate(new Date());
+}
+/** Adds days to a YYYY-MM-DD date. */
+export function addDays(date: string, days: number): string {
+  const d = new Date(`${date}T00:00:00Z`);
+  d.setUTCDate(d.getUTCDate() + days);
+  return d.toISOString().slice(0, 10);
+}
+
+export const CATEGORY_LABEL = {
+  CUP: "Cup",
+  LID: "Lid",
+  CONTAINER: "Container",
+  SLEEVE: "Sleeve",
+  OTHER: "Other",
+} as const;
+
+export const REFUND_REASON_LABEL: Record<string, string> = {
+  ORDER_CANCELLED: "Order cancelled",
+  RETURN: "Return",
+  TRANSIT_ISSUE: "Transit issue",
+  OVERCHARGE: "Overcharge",
+};
