@@ -121,7 +121,7 @@ function StaffOrdersPage() {
   );
 }
 
-function OrderDrawer({ id, flags, onClose }: { id: number | null; flags?: { unpaid_flag: boolean | null; refund_needed: boolean | null }; onClose: () => void }) {
+function OrderDrawer({ id, flags, onClose }: { id: number | null; flags?: { unpaid_flag: boolean | null; refund_needed: boolean | null } | undefined; onClose: () => void }) {
   const qc = useQueryClient();
   const q = useQuery({ queryKey: ["orders", "detail", id], queryFn: () => getOrder(id!), enabled: id != null });
   const cancel = useMutation({
@@ -140,7 +140,7 @@ function OrderDrawer({ id, flags, onClose }: { id: number | null; flags?: { unpa
         <SheetHeader>
           <SheetTitle className="page-title">Order #{id}</SheetTitle>
           <SheetDescription>
-            {o ? `${o.retailer_id ? "" : ""}Ordered ${formatDateTime(o.ordered_at)} · Total ${formatWon(o.total_amount)}` : "Loading…"}
+            {o ? `Ordered ${formatDateTime(o.ordered_at)} · Total ${formatWon(o.total_amount)}` : "Loading…"}
           </SheetDescription>
         </SheetHeader>
         {o && (
