@@ -233,8 +233,8 @@ function RefundForm({ o, refundable, refundedQty }: { o: OrderDetail; refundable
         p_reason: reason as Reason,
         p_method: method.trim(),
         p_transacted_at: seoulLocalToIso(at),
-        // Line refunds leave p_amount out (null): the server computes quantity × unit price.
-        ...(byLine ? { p_order_item_id: item!.order_item_id, p_quantity: nQty } : { p_amount: nAmount }),
+        // Line refunds send p_amount null: the server computes quantity × unit price.
+        ...(byLine ? { p_amount: null, p_order_item_id: item!.order_item_id, p_quantity: nQty } : { p_amount: nAmount }),
       }),
     onSuccess: () => {
       toast.success("Refund recorded");
